@@ -8,6 +8,7 @@ import {
 import Home from "./pages/Home";
 import ParticipantsView from "./pages/Participants";
 import ParticipantWidget from "./pages/Participants/ParticipantWidget";
+import SelectParticipantWidget from "./pages/Home/addparticipants/SelectParticipantsWidget";
 
 import Menu from './menu/Menu';
 
@@ -23,6 +24,9 @@ function App() {
             ]}/>
           </nav>
           <Switch>
+            <Route path="/selectParticipants">
+              <SelectParticipantWidget />
+            </Route>            
             <Route path="/participant/add">
               <ParticipantWidget />
             </Route>            
