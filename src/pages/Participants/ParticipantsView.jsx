@@ -33,7 +33,7 @@ export const ParticipantsView = () => {
                     {title: "Email", render: (row) => row.email},
                     {title: "Edit", render: (row) => <Button onClick={editParticipant(row.id)}>Edit</Button>},
                     {title: "Delete", render: (row) => <Button onClick={deleteParticipant(row.id)}>Delete</Button>}]} 
-                    />
+                />
             </Paper>
 };
 

@@ -1,8 +1,13 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
+import { Button, Paper } from '@material-ui/core';
 
 export const HomeView = () => {
-    return <div>
+
+    const history = useHistory();
+
+    return <Paper>
         <h1>Secret Santa</h1>
-        <p>Assign gifts randomly</p>
-    </div>
+        <Button onClick={() => history.push("/selectParticipants")}>Assign gifts randomly</Button>
+    </Paper>;
 } 
