@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Button, Paper } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
+import DefaultButton from "../../base/buttons/DefaultButton";
 
 export const HomeView = () => {
 
@@ -8,6 +9,6 @@ export const HomeView = () => {
 
     return <Paper>
         <h1>Secret Santa</h1>
-        <Button onClick={() => history.push("/selectParticipants")}>Assign gifts randomly</Button>
+        <DefaultButton onClick={() => history.push("/selectParticipants")}>Assign gifts randomly</DefaultButton>
     </Paper>;
 } 

@@ -6,6 +6,7 @@ import PageableGrid from 'base/pageable/PageableGrid';
 import {baseUrl} from '../../../settings';
 import { useHistory } from 'react-router-dom';
 import { addRequestParam } from 'base/addRequestParams';
+import DefaultButton from "../../../base/buttons/DefaultButton";
 
 import axios from "../../../axios/BaseAxios";
 
@@ -34,7 +35,7 @@ export const SelectParticipantWidget = () => {
 
     const renderAddButton = (row: any) => {
         if (selected.indexOf(row) < 0) {
-            return <Button onClick={() => addToSelected(row)}>Add</Button>;
+            return <DefaultButton onClick={() => addToSelected(row)}>Add</DefaultButton>;
         } else {
             return null;
         } 
@@ -59,7 +60,7 @@ export const SelectParticipantWidget = () => {
 
     return <Paper elevation={5}>
         {error}
-        <Grid xs={12} container direction="row">
+        <Grid xs={12} container direction="row" spacing={5}>
             <Grid xs={6} item>
                 <PageableGrid url={`${baseUrl}/participant`} columns={[
                     {title: "First Name", render: (row) => row.firstName},
@@ -74,9 +75,9 @@ export const SelectParticipantWidget = () => {
                     <DataGridView list={selected} columns={[
                         {title: "First", render: row => row.firstName},
                         {title: "Last", render: row => row.lastName},
-                        {title: "Delete", render: row => <Button onClick={() => deleteFromSelected(row)}>Delete</Button>},
+                        {title: "Delete", render: row => <DefaultButton onClick={() => deleteFromSelected(row)}>Delete</DefaultButton>},
                     ]}/>
-                    <Button onClick={assignGifts}>ASSIGN GIFTS</Button>
+                    <DefaultButton onClick={assignGifts} disabled={selected.length <= 2}>ASSIGN GIFTS</DefaultButton>
                 </Grid>
             </Grid>
         </Grid>

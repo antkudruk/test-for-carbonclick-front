@@ -1,6 +1,7 @@
 import React from 'react';
 import { Paper, Grid, TextField, Button } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
+import DefaultButton from "../../base/buttons/DefaultButton";
 
 export const ParticipantWidget = () => {
 
@@ -27,8 +28,8 @@ export const ParticipantWidget = () => {
                 <Grid item xs={3}><TextField/></Grid>
             </Grid>
         </Grid>
-        <Button onClick={onApply}>Apply</Button>
-        <Button onClick={onCancel}>Cancel</Button>
+        <DefaultButton onClick={onApply}>Apply</DefaultButton>
+        <DefaultButton onClick={onCancel}>Cancel</DefaultButton>
     </Paper>
 };
 
