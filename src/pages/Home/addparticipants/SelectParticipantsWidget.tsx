@@ -5,10 +5,10 @@ import PageableGrid from 'base/pageable/PageableGrid';
 
 import {baseUrl} from '../../../settings';
 import { useHistory } from 'react-router-dom';
-import { addRequestParam } from 'base/addRequestParams';
 import DefaultButton from "../../../base/buttons/DefaultButton";
 
 import axios from "../../../axios/BaseAxios";
+import DefaultTextField from "../../../base/textfields/DefaultTextfield";
 
 export const SelectParticipantWidget = () => {
 
@@ -23,7 +23,7 @@ export const SelectParticipantWidget = () => {
             selected.push(row);
             setSelected(selected.slice(0));
         }
-    }
+    };
 
     const deleteFromSelected = (row: any) => {
         const index = selected.map(t => t.id).indexOf(row.id);
@@ -31,7 +31,7 @@ export const SelectParticipantWidget = () => {
             selected.splice(index, 1);
             setSelected(selected.slice(0));
         }
-    }
+    };
 
     const renderAddButton = (row: any) => {
         if (selected.indexOf(row) < 0) {
@@ -39,7 +39,7 @@ export const SelectParticipantWidget = () => {
         } else {
             return null;
         } 
-    }
+    };
 
     const assignGifts = ( ) => {
         axios.post(`${baseUrl}/year/generate`, {
@@ -54,9 +54,7 @@ export const SelectParticipantWidget = () => {
                 setError(error.message || error.toString());
               }
             )
-
-        
-    }
+    };
 
     return <Paper elevation={5}>
         {error}
@@ -71,18 +69,18 @@ export const SelectParticipantWidget = () => {
             </Grid>
             <Grid xs={5} item container>
                 <Grid xs={12} container direction="column">
-                    <TextField label='Title' value={title} onChange={(event) => setTitle(event.target.value)}/>
+                    <DefaultTextField onTextChange={setTitle} label='Title' value={title} />
                     <DataGridView list={selected} columns={[
                         {title: "First", render: row => row.firstName},
                         {title: "Last", render: row => row.lastName},
                         {title: "Delete", render: row => <DefaultButton onClick={() => deleteFromSelected(row)}>Delete</DefaultButton>},
                     ]}/>
-                    <DefaultButton onClick={assignGifts} disabled={selected.length <= 2}>ASSIGN GIFTS</DefaultButton>
+                    <DefaultButton onClick={assignGifts} disabled={selected.length < 2}>ASSIGN GIFTS</DefaultButton>
                 </Grid>
             </Grid>
         </Grid>
         
     </Paper>
-}
+};
 
 export default SelectParticipantWidget;

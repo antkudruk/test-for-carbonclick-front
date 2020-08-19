@@ -24,13 +24,16 @@ function App() {
             ]}/>
           </nav>
           <Switch>
-            <Route path="/selectParticipants">
+            <Route exact path="/selectParticipants">
               <SelectParticipantWidget />
-            </Route>            
-            <Route path="/participant/add">
+            </Route>
+            <Route path="/participants/edit/:participantId">
               <ParticipantWidget />
-            </Route>            
-            <Route path="/participants">
+            </Route>
+            <Route exact path="/participants/add">
+              <ParticipantWidget />
+            </Route>
+            <Route exact path="/participants">
               <ParticipantsView />
             </Route>
             <Route path="/">
