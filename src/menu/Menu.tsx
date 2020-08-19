@@ -21,7 +21,6 @@ const Menu = (props: MenuProps) => {
                 <IconButton edge="start"color="inherit" aria-label="menu">
                     <MenuIcon onClick={() => setVisible(true)}/>
                 </IconButton>
-                <DefaultButton color="inherit">Login</DefaultButton>
                 </Toolbar>
             </AppBar>
             {visible && <Drawer anchor='left' open={visible} onClose={() => setVisible(false)}>

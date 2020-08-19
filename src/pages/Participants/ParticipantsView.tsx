@@ -14,12 +14,8 @@ export const ParticipantsView = () => {
 
     const history = useHistory();
 
-    const editParticipant = (id: number) => {
-        //history.push('/participant/edit/:participantId');
-    };
-
-    const deleteParticipant = (id: number) => {
-        // TODO: Implement
+    const editParticipant = (participantId: number) => {
+        history.push(`/participants/edit/${participantId}`);
     };
 
     const addParticipant = () => {
@@ -33,8 +29,8 @@ export const ParticipantsView = () => {
                     {title: "First Name", render: (row) => row.firstName},
                     {title: "Last Name", render: (row) => row.lastName},
                     {title: "Email", render: (row) => row.email},
-                    {title: "Edit", render: (row) => <DefaultButton onClick={editParticipant(row.id)}>Edit</DefaultButton>},
-                    {title: "Delete", render: (row) => <DefaultButton onClick={deleteParticipant(row.id)}>Delete</DefaultButton>}]}
+                    {title: "Edit", render: (row) => <DefaultButton onClick={() => editParticipant(row.id)}>Edit</DefaultButton>}
+                  ]}
                 />
             </Paper>
 };
