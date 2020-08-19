@@ -7,8 +7,9 @@ import { DefaultPageResponse } from "../DefaultPageResponse";
 import { PageableGridProperties } from "./PageableGridProperties";
 
 import { AxiosResponse } from "axios";
-import getList from "./requests";
 import { addRequestParam } from "base/addRequestParams";
+
+import axios from "../../axios/BaseAxios";
 
 export const PageableGrid = (props: PageableGridProperties<any>) => {
 
@@ -25,7 +26,7 @@ export const PageableGrid = (props: PageableGridProperties<any>) => {
 
     const requestData = (pageNumber: number) => {
           const pageableUrl = addRequestParam(props.url, {pageNumber, pageSize});
-          getList(pageableUrl)
+          axios.get(pageableUrl)
             .then(
               ({data}: AxiosResponse<DefaultPageResponse<any>>) => {
                 setList(data.content);
@@ -43,7 +44,7 @@ export const PageableGrid = (props: PageableGridProperties<any>) => {
         requestData(newPage);
     };
 
-    return <Paper elevation={0}>
+    return <Paper elevation={5}>
         {error}
         {list && <>
           <DataGridView 
