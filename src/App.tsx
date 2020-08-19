@@ -11,6 +11,7 @@ import ParticipantWidget from "./pages/Participants/ParticipantWidget";
 import SelectParticipantWidget from "./pages/Home/addparticipants/SelectParticipantsWidget";
 
 import Menu from './menu/Menu';
+import {AssignmentWidget} from "./pages/Home/assignments/AssignmentWidger";
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
             ]}/>
           </nav>
           <Switch>
+            <Route path="/years/:yearId">
+              <AssignmentWidget />
+            </Route>
             <Route exact path="/selectParticipants">
               <SelectParticipantWidget />
             </Route>
@@ -36,7 +40,7 @@ function App() {
             <Route exact path="/participants">
               <ParticipantsView />
             </Route>
-            <Route path="/">
+            <Route exact path="/">
               <Home />
             </Route>
           </Switch>

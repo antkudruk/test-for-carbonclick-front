@@ -18,10 +18,6 @@ export const ParticipantsView = () => {
         history.push(`/participants/edit/${participantId}`);
     };
 
-    const deleteParticipant = (id: number) => {
-        // TODO: Implement
-    };
-
     const addParticipant = () => {
         history.push('/participants/add');
     };
