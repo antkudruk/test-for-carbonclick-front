@@ -6,7 +6,9 @@ import {
   Route
 } from "react-router-dom";
 import Home from "./pages/Home";
-import Participants from "./pages/Participants";
+import ParticipantsView from "./pages/Participants";
+import ParticipantWidget from "./pages/Participants/ParticipantWidget";
+
 import Menu from './menu/Menu';
 
 function App() {
@@ -21,8 +23,11 @@ function App() {
             ]}/>
           </nav>
           <Switch>
+            <Route path="/participant/add">
+              <ParticipantWidget />
+            </Route>            
             <Route path="/participants">
-              <Participants />
+              <ParticipantsView />
             </Route>
             <Route path="/">
               <Home />
