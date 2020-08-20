@@ -3,6 +3,8 @@ import { Paper, Grid } from '@material-ui/core';
 
 import {DefaultButton} from '../../base/buttons/DefaultButton';
 import {DefaultTextField} from '../../base/textfields/DefaultTextfield';
+import {DefaultPaper} from '../../base/papers/DefaultPaper';
+import ErrorPaper from 'base/papers/ErrorPaper';
 
 interface LoginViewProperties {
     error: boolean;
@@ -14,9 +16,14 @@ export const LoginView = (props: LoginViewProperties) => {
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
-    return <Paper>
+    return <DefaultPaper style={{
+        position: 'absolute', 
+        alignment: 'center', 
+        width: '100%',
+        maxWidth: '450px', 
+        minWidth: '150px'}}>
         <h1>Login</h1>
-        {props.error && "Please make sure you entered your credentials right."}
+        <ErrorPaper error={props.error && "Please make sure you entered your credentials right."}/>
         <Grid container direction='column'>
             <DefaultTextField 
                 label='Username' 
@@ -30,5 +37,5 @@ export const LoginView = (props: LoginViewProperties) => {
                 autoComplete="current-password"/>
         </Grid>
         <DefaultButton onClick={() => props.loginCallback(username, password)}>Login</DefaultButton>
-    </Paper>;
+    </DefaultPaper>;
 } 

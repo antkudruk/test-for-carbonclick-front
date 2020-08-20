@@ -6,8 +6,8 @@ import {
   Route
 } from "react-router-dom";
 import Home from "./pages/Home";
-import ParticipantsView from "./pages/Participants";
-import ParticipantWidget from "./pages/Participants/ParticipantWidget";
+import ParticipantsList from "./pages/Participants/List";
+import ParticipantWidget from "./pages/Participants/Form";
 import SelectParticipantWidget from "./pages/Home/addparticipants/SelectParticipantsWidget";
 
 import {LoginController, useToken} from "pages/Login";
@@ -24,10 +24,10 @@ function App() {
       <Router>
         <div>
           <nav>
-            <Menu items={[
+            {jwtToken &&<Menu items={[
                   {id: 1, title: 'Assignment', link: '/'},
-                  {id: 1, title: 'Participants', link: '/participants'},
-            ]}/>
+                  {id: 2, title: 'Participants', link: '/participants'},
+            ]}/>}
           </nav>
           <Switch>
             {!jwtToken && <Route path="/"><LoginController /></Route>}
@@ -44,7 +44,7 @@ function App() {
               <ParticipantWidget />
             </Route>
             <Route exact path="/participants">
-              <ParticipantsView />
+              <ParticipantsList />
             </Route>
             <Route exact path="/">
               <Home />

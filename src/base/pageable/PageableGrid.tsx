@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Paper } from "@material-ui/core";
 
 import { TablePagination } from '@material-ui/core';
 import DataGridView from "../datagrid/DataGridView";
-import { DefaultPageResponse } from "../DefaultPageResponse";
+import { DefaultPageResponse } from "../rest/DefaultPageResponse";
 import { PageableGridProperties } from "./PageableGridProperties";
 
 import { AxiosResponse } from "axios";
-import { addRequestParam } from "base/addRequestParams";
+import { addRequestParam } from "base/rest/addRequestParams";
 
 import axios from "../../axios/BaseAxios";
+
+import {DefaultPaper} from '../../base/papers/DefaultPaper';
 
 export const PageableGrid = (props: PageableGridProperties<any>) => {
 
@@ -44,7 +45,7 @@ export const PageableGrid = (props: PageableGridProperties<any>) => {
         requestData(newPage);
     };
 
-    return <Paper elevation={5}>
+    return <DefaultPaper>
         {error}
         {list && <>
           <DataGridView 
@@ -59,7 +60,7 @@ export const PageableGrid = (props: PageableGridProperties<any>) => {
         />
         </>}
         
-    </Paper>;
+    </DefaultPaper>;
 };
 
 export default PageableGrid;
