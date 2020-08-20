@@ -21,8 +21,6 @@ const hasErrorMessage = (error: ErrorResponse | null, fieldName: string): boolea
 
 export const ParticipantView = (props: BaseViewProperties<ParticipantData>) => {
 
-    console.log("entered participants views", {props});
-
     const {error, data, onSave, onCancel} = props;
 
     const [firstName, setFirstName] = useState("");

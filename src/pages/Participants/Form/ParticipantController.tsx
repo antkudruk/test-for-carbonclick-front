@@ -11,24 +11,17 @@ export const ParticipantController = () => {
 
     const {participantId} = useParams();
 
-    console.log("participantId", {participantId});
-
     const history = useHistory();
 
     const [error, setError] = useState<ErrorResponse | null>(null);
     const [data, setData] = useState<ParticipantData | null>(null);
 
     const onApply = (data: ParticipantData) => {
-        console.log("on apply", {data});
         save(data).then(
-            (data) => {
-                console.log("on save", {data});
-                debugger;
+            () => {
                 history.push("/participants")
             },
             (error: any) => {
-                console.log("on error", {error});
-                debugger;
                 setError(error?.response?.data);
             }
         );
@@ -47,15 +40,12 @@ export const ParticipantController = () => {
     };
 
     const requestFormData = (id: number) => {
-        console.log('Request participant data...', {id});
         axios.get(`${baseUrl}/participant/${id}`)
             .then(
                 ({data}: AxiosResponse<ParticipantData>) => {
-                    console.log('Request participant data OK', {data});
                     setData(data);
                 },
                 (error) => {
-                    console.log('Request participant data ERROR', {error});
                     setError(error.message || error.toString());
                 }
             )
