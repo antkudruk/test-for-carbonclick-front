@@ -9,7 +9,7 @@ export const AssignmentWidget = () => {
     const {yearId} = useParams();
 
     return <Paper>
-        <h1>Existing Assignments</h1>
+        <h1>Assignments</h1>
         <PageableGrid url={`${baseUrl}/year/${yearId}/assignment`} columns={[
             {title: "Giver", render: row => row.giver.firstName + " " + row.giver.lastName},
             {title: "Taker", render: row => row.taker.firstName + " " + row.taker.lastName}

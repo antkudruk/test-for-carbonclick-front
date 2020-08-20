@@ -10,10 +10,15 @@ import ParticipantsView from "./pages/Participants";
 import ParticipantWidget from "./pages/Participants/ParticipantWidget";
 import SelectParticipantWidget from "./pages/Home/addparticipants/SelectParticipantsWidget";
 
+import {LoginController, useToken} from "pages/Login";
+
 import Menu from './menu/Menu';
 import {AssignmentWidget} from "./pages/Home/assignments/AssignmentWidger";
 
 function App() {
+
+  const [jwtToken] = useToken();
+
   return (
     <div className="App">
       <Router>
@@ -25,6 +30,7 @@ function App() {
             ]}/>
           </nav>
           <Switch>
+            {!jwtToken && <Route path="/"><LoginController /></Route>}
             <Route path="/years/:yearId">
               <AssignmentWidget />
             </Route>
