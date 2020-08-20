@@ -8,6 +8,8 @@ export const DefaultPaper = (props: any) => {
         style={{
             margin: 10,
             padding: 15,
+            left: "10px",
+            right: "10px",
             ...props.style
         }} />;
 };

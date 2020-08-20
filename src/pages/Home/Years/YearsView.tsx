@@ -4,7 +4,7 @@ import PageableGrid from "../../../base/pageable/PageableGrid";
 import {baseUrl} from "../../../settings";
 import DefaultButton from "../../../base/buttons/DefaultButton";
 
-export const YearsWidget = () => {
+export const YearsView = () => {
 
     const history = useHistory();
 
@@ -20,3 +20,5 @@ export const YearsWidget = () => {
         ]}/>
     </>;
 };
+
+export default YearsView;

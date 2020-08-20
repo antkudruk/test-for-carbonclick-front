@@ -5,8 +5,8 @@ export const ErrorPaper = (props: any) => {
     const {error} = props;
 
     const style = {
-        height: "100%",
-        width: "100%",
+        left: "25px",
+        right: "25px",
         backgroundColor: "#FFCDCD",
         color: "#550000"
     };
@@ -16,18 +16,14 @@ export const ErrorPaper = (props: any) => {
     }
 
     if(!error.hasOwnProperty("fieldViolations")) {
-        return <DefaultPaper {...props}>
-        <div style={style}>
+        return <DefaultPaper style={style} {...props}>
             {error.toString()}
-        </div>
     </DefaultPaper>
     }
 
     return ((!error?.fieldViolations || ([].length === null)) && error?.error)
-        ? <DefaultPaper {...props}>
-            <div style={style}>
+        ? <DefaultPaper style={style} {...props}>
                 {error?.error}
-            </div>
         </DefaultPaper>
         : null;
 };

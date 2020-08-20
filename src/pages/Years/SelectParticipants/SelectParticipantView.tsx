@@ -1,19 +1,24 @@
 import React, { useState } from 'react';
-import { Paper, Grid, Button, TextField } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import DataGridView from 'base/datagrid/DataGridView';
 import PageableGrid from 'base/pageable/PageableGrid';
 
 import {baseUrl} from '../../../settings';
-import { useHistory } from 'react-router-dom';
 import DefaultButton from "../../../base/buttons/DefaultButton";
 
-import axios from "../../../axios/BaseAxios";
 import DefaultTextField from "../../../base/textfields/DefaultTextfield";
+import DefaultPaper from 'base/papers/DefaultPaper';
+import { ErrorResponse } from 'base/rest/ErrorResponse';
+import { SelectParticipantData } from './SelectParticipantData';
 
-export const SelectParticipantWidget = () => {
+interface SelectParticipantViewProperties {
+    assignGifts: (data: SelectParticipantData) => any;
+    error: ErrorResponse | null;
+}
 
-    const [error, setError] = useState<string>();
-    const history = useHistory();
+export const SelectParticipantView = (props: SelectParticipantViewProperties) => {
+
+    const {assignGifts, error} = props;
     const [title, setTitle] = useState("");
     const [selected, setSelected] = useState<any[]>([]);
 
@@ -41,22 +46,7 @@ export const SelectParticipantWidget = () => {
         } 
     };
 
-    const assignGifts = ( ) => {
-        axios.post(`${baseUrl}/year/generate`, {
-              title: title,
-              participants: selected.map(t => t.id)
-            })
-            .then(
-              () => {
-                history.push("/");
-              },
-              (error) => {
-                setError(error.message || error.toString());
-              }
-            )
-    };
-
-    return <Paper elevation={5}>
+    return <DefaultPaper>
         {error}
         <Grid xs={12} container direction="row" spacing={5}>
             <Grid xs={6} item>
@@ -75,12 +65,12 @@ export const SelectParticipantWidget = () => {
                         {title: "Last", render: row => row.lastName},
                         {title: "Delete", render: row => <DefaultButton onClick={() => deleteFromSelected(row)}>Delete</DefaultButton>},
                     ]}/>
-                    <DefaultButton onClick={assignGifts} disabled={selected.length < 2}>ASSIGN GIFTS</DefaultButton>
+                    <DefaultButton onClick={() => assignGifts({title, selected})} disabled={selected.length < 2}>ASSIGN GIFTS</DefaultButton>
                 </Grid>
             </Grid>
         </Grid>
         
-    </Paper>
+    </DefaultPaper>
 };
 
-export default SelectParticipantWidget;
+export default SelectParticipantView;

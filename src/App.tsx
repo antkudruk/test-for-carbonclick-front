@@ -7,13 +7,12 @@ import {
 } from "react-router-dom";
 import Home from "./pages/Home";
 import ParticipantsList from "./pages/Participants/List";
-import ParticipantWidget from "./pages/Participants/Form";
-import SelectParticipantWidget from "./pages/Home/addparticipants/SelectParticipantsWidget";
+import ParticipantForm from "./pages/Participants/Form";
+import SelectParticipants from "./pages/Years/SelectParticipants";
+import ExistingAssignments from "./pages/Years/ExistingAssignments";
 
 import {LoginController, useToken} from "pages/Login";
-
 import Menu from './menu/Menu';
-import {AssignmentWidget} from "./pages/Home/assignments/AssignmentWidger";
 
 function App() {
 
@@ -32,16 +31,16 @@ function App() {
           <Switch>
             {!jwtToken && <Route path="/"><LoginController /></Route>}
             <Route path="/years/:yearId">
-              <AssignmentWidget />
+              <ExistingAssignments />
             </Route>
             <Route exact path="/selectParticipants">
-              <SelectParticipantWidget />
+              <SelectParticipants />
             </Route>
             <Route path="/participants/edit/:participantId">
-              <ParticipantWidget />
+              <ParticipantForm />
             </Route>
             <Route exact path="/participants/add">
-              <ParticipantWidget />
+              <ParticipantForm />
             </Route>
             <Route exact path="/participants">
               <ParticipantsList />

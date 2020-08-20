@@ -18,8 +18,8 @@ export const LoginView = (props: LoginViewProperties) => {
 
     return <DefaultPaper style={{
         position: 'absolute', 
-        alignment: 'center', 
-        width: '100%',
+        left: "50px",
+        right: "50px",
         maxWidth: '450px', 
         minWidth: '150px'}}>
         <h1>Login</h1>

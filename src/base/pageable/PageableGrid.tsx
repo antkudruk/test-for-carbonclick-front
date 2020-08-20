@@ -20,7 +20,6 @@ export const PageableGrid = (props: PageableGridProperties<any>) => {
     const [total, setTotal] = useState(0);
     const [error, setError] = useState<string>();
 
-
     useEffect(() => {
         requestData(pageNumber);
     }, []);

@@ -4,7 +4,7 @@ import PageableGrid from "../../../base/pageable/PageableGrid";
 import {baseUrl} from "../../../settings";
 import {DefaultPaper} from '../../../base/papers/DefaultPaper';
 
-export const AssignmentWidget = () => {
+export const ExistingAssignmentView = () => {
 
     const {yearId} = useParams();
 
@@ -16,3 +16,5 @@ export const AssignmentWidget = () => {
         ]}/>
     </DefaultPaper>;
 }
+
+export default ExistingAssignmentView;
