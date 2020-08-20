@@ -1,8 +1,7 @@
 import React from 'react';
 
-import {PageableGrid} from '../../../base/pageable/PageableGrid';
+import PageableGrid from '../../../base/PageableGrid';
 import {baseUrl} from '../../../settings';
-import { Paper } from '@material-ui/core';
 import DefaultButton from "../../../base/buttons/DefaultButton";
 import {DefaultPaper} from '../../../base/papers/DefaultPaper';
 

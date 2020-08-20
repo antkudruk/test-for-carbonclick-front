@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import PageableGrid from "../../../base/pageable/PageableGrid";
+import PageableGrid from "../../../base/PageableGrid";
 import {baseUrl} from "../../../settings";
 import DefaultButton from "../../../base/buttons/DefaultButton";
 

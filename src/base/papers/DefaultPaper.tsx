@@ -10,7 +10,8 @@ export const DefaultPaper = (props: any) => {
             padding: 15,
             left: "10px",
             right: "10px",
-            ...props.style
+            ...props.style,
+            minWidth: "250px"
         }} />;
 };
 

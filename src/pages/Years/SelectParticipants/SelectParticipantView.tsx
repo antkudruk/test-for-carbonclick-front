@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Grid } from '@material-ui/core';
-import DataGridView from 'base/datagrid/DataGridView';
-import PageableGrid from 'base/pageable/PageableGrid';
+import DataGrid from 'base/DataGrid';
+import PageableGrid from 'base/PageableGrid';
 
 import {baseUrl} from '../../../settings';
 import DefaultButton from "../../../base/buttons/DefaultButton";
@@ -10,6 +10,9 @@ import DefaultTextField from "../../../base/textfields/DefaultTextfield";
 import DefaultPaper from 'base/papers/DefaultPaper';
 import { ErrorResponse } from 'base/rest/ErrorResponse';
 import { SelectParticipantData } from './SelectParticipantData';
+import ErrorPaper from 'base/papers/ErrorPaper';
+import hasErrorMessage from 'base/rest/hasErrorMessage';
+import getErrorMessage from 'base/rest/getErrorMessage';
 
 interface SelectParticipantViewProperties {
     assignGifts: (data: SelectParticipantData) => any;
@@ -47,9 +50,10 @@ export const SelectParticipantView = (props: SelectParticipantViewProperties) =>
     };
 
     return <DefaultPaper>
-        {error}
+        <ErrorPaper error = {error} />
         <Grid xs={12} container direction="row" spacing={5}>
             <Grid xs={6} item>
+                <h1>Participants to select</h1>
                 <PageableGrid url={`${baseUrl}/participant`} columns={[
                     {title: "First Name", render: (row) => row.firstName},
                     {title: "Last Name", render: (row) => row.lastName},
@@ -59,13 +63,18 @@ export const SelectParticipantView = (props: SelectParticipantViewProperties) =>
             </Grid>
             <Grid xs={5} item container>
                 <Grid xs={12} container direction="column">
-                    <DefaultTextField onTextChange={setTitle} label='Title' value={title} />
-                    <DataGridView list={selected} columns={[
-                        {title: "First", render: row => row.firstName},
-                        {title: "Last", render: row => row.lastName},
-                        {title: "Delete", render: row => <DefaultButton onClick={() => deleteFromSelected(row)}>Delete</DefaultButton>},
-                    ]}/>
-                    <DefaultButton onClick={() => assignGifts({title, selected})} disabled={selected.length < 2}>ASSIGN GIFTS</DefaultButton>
+                    <h1>Selected Participants</h1>
+                    <DefaultPaper>    
+                        <DefaultTextField onTextChange={setTitle} label='Year Title' value={title} error={hasErrorMessage(error, 'title')} helperText={getErrorMessage(error, 'title')}/>
+                        <DefaultPaper>
+                            <DataGrid list={selected} columns={[
+                                {title: "First", render: row => row.firstName},
+                                {title: "Last", render: row => row.lastName},
+                                {title: "Delete", render: row => <DefaultButton onClick={() => deleteFromSelected(row)}>Delete</DefaultButton>},
+                            ]}/>
+                        </DefaultPaper>
+                        <DefaultButton onClick={() => assignGifts({title, selected})} disabled={selected.length < 2}>ASSIGN GIFTS</DefaultButton>
+                    </DefaultPaper>
                 </Grid>
             </Grid>
         </Grid>

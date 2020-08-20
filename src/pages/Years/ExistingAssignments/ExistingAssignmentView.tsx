@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import PageableGrid from "../../../base/pageable/PageableGrid";
+import PageableGrid from "../../../base/PageableGrid";
 import {baseUrl} from "../../../settings";
 import {DefaultPaper} from '../../../base/papers/DefaultPaper';
 

@@ -5,6 +5,8 @@ import DefaultTextField from "../../../base/textfields/DefaultTextfield";
 import { ErrorResponse } from 'base/rest/ErrorResponse';
 import { ParticipantData } from './ParticipantData';
 import {ErrorPaper} from "../../../base/papers/ErrorPaper";
+import hasErrorMessage from 'base/rest/hasErrorMessage';
+import getErrorMessage from 'base/rest/getErrorMessage';
 
 interface BaseViewProperties<T> {
     error: ErrorResponse | null;
@@ -12,12 +14,6 @@ interface BaseViewProperties<T> {
     onSave: (data: T) => any;
     onCancel: () => any;
 };
-
-const getErrorMessage = (error: ErrorResponse | null, fieldName: string): string => 
-    error?.fieldViolations?.filter(e => e.fieldName === fieldName).map(e => e.message).join(", ") || ""
-
-const hasErrorMessage = (error: ErrorResponse | null, fieldName: string): boolean => 
-    !!(error?.fieldViolations?.some(e => e.fieldName === fieldName));
 
 export const ParticipantView = (props: BaseViewProperties<ParticipantData>) => {
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { TablePagination } from '@material-ui/core';
-import DataGridView from "../datagrid/DataGridView";
+import DataGrid from "../DataGrid";
 import { DefaultPageResponse } from "../rest/DefaultPageResponse";
 import { PageableGridProperties } from "./PageableGridProperties";
 
@@ -10,11 +10,11 @@ import { addRequestParam } from "base/rest/addRequestParams";
 
 import axios from "../../axios/BaseAxios";
 
-import {DefaultPaper} from '../../base/papers/DefaultPaper';
+import {DefaultPaper} from '../papers/DefaultPaper';
 
 export const PageableGrid = (props: PageableGridProperties<any>) => {
 
-    const pageSize = 10;
+    const [pageSize, setPageSize] = useState<any>(10);
     const [list, setList] = useState<any>();
     const [pageNumber, setPageNumber] = useState(0);
     const [total, setTotal] = useState(0);
@@ -25,13 +25,13 @@ export const PageableGrid = (props: PageableGridProperties<any>) => {
     }, []);
 
     const requestData = (pageNumber: number) => {
-          const pageableUrl = addRequestParam(props.url, {pageNumber, pageSize});
+          const pageableUrl = addRequestParam(props.url, {pageNumber: pageNumber, pageSize});
           axios.get(pageableUrl)
             .then(
               ({data}: AxiosResponse<DefaultPageResponse<any>>) => {
                 setList(data.content);
                 setTotal(data.total);
-                setPageNumber(data.pageNumber);
+                setPageNumber(pageNumber);
                 setError("");
               },
               (error) => {
@@ -41,22 +41,31 @@ export const PageableGrid = (props: PageableGridProperties<any>) => {
     };
 
     const onChangePage = (ev: any, newPage: number) => {
-        requestData(newPage);
+      requestData(newPage);
     };
+
+    const onChangeRowsPerPage = (ev: any) => {
+        const newPageSize = ev.target.value;
+        setPageSize(newPageSize);
+    };
+
+    useEffect(() => requestData(0), [pageSize]);
 
     return <DefaultPaper>
         {error}
         {list && <>
-          <DataGridView 
-          list={list}
-          columns={props.columns}
+          <DataGrid
+              list={list}
+              columns={props.columns}
           />
-        <TablePagination 
-            page={pageNumber}
-            onChangePage={onChangePage}
-            rowsPerPage={pageSize}
-            count={total}
-        />
+          <TablePagination 
+              page={pageNumber}
+              onChangePage={onChangePage}
+              rowsPerPage={pageSize}
+              count={total}
+              rowsPerPageOptions={[5, 10, 15, 20]}
+              onChangeRowsPerPage={onChangeRowsPerPage}
+          />
         </>}
         
     </DefaultPaper>;

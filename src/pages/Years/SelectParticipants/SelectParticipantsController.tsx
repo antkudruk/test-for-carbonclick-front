@@ -23,7 +23,7 @@ export const SelectParticipantsController = () => {
                 history.push("/");
               },
               (error) => {
-                setError(error.message || error.toString());
+                setError(error?.response?.data);
               }
             )
     };
