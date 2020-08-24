@@ -17,6 +17,7 @@ export const YearsView = () => {
         <PageableGrid url={`${baseUrl}/year`} columns={[
             {title: "Title", render: row => row.title},
             {title: "View", render: row => <DefaultButton onClick={() => showYearAssignments(row.id)}>View</DefaultButton>},
+            {title: "Date Added", render: row => row.createdAt}
         ]}/>
     </>;
 };
